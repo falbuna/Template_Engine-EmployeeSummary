@@ -14,6 +14,94 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+    const question = [
+            {
+                type: 'list',
+                name: 'title',
+                message: 'What is the job title of the team member you want to add?',
+                choices: [
+                    'Manager',
+                    'Engineer',
+                    'Intern']
+            },
+        ];
+
+    const ManagerPrompts = [
+        {
+            name: 'name',
+            message: 'What is the name of the Manager you want to add?'
+        },
+        {
+            name: 'email',
+            message: 'What is the email of the Manager you want to add?'
+        },
+        {
+            name: 'office',
+            message: 'What is the office number of the Manager you want add?'
+        },
+        {
+            type: 'confirm',
+            name: 'addnewmember',
+            message: 'Do you want to add another team member?',
+            default: true,
+        },
+    ];
+
+        function managerInfo(){
+            inquirer.prompt(ManagerPrompts).then((data) => {
+                console.log(data.office)
+                if (data.addnewmember){
+                    ask();
+            }
+        })
+        };
+
+    const EngineerPrompts = [
+        {
+            name: 'name',
+            message: 'What is the name of the Engineer you want to add?'
+        },
+        {
+            name: 'email',
+            message: 'What is the email of the Engineer you want to add?'
+        },
+        {
+            name: 'github',
+            message: 'What is Github account of the Engineer you want add?'
+        },
+        {
+            type: 'confirm',
+            name: 'addnewmember',
+            message: 'Do you want to add another team member?',
+            default: true,
+        },
+    ];
+
+        function engineerInfo(){
+            inquirer.prompt(EngineerPrompts).then((data) => {
+                console.log(data.github)
+                if (data.addnewmember) {
+                    ask();
+                }
+                })
+        };
+
+        function ask(){
+            inquirer.prompt(question).then((answers) => {
+                if (answers.title === 'Manager'){
+                    managerInfo();
+                }
+                if (answers.title === 'Engineer'){
+                    engineerInfo();
+                }
+                if (answers.title === 'Intern'){
+                    internInfo();
+                }
+            })
+        }
+
+        ask();
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
