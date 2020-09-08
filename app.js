@@ -14,93 +14,89 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-    const question = [
-            {
-                type: 'list',
-                name: 'title',
-                message: 'What is the job title of the team member you want to add?',
-                choices: [
-                    'Manager',
-                    'Engineer',
-                    'Intern']
-            },
-        ];
+const employeePrompts = [
+    {
+        name: 'name',
+        message: 'What is the name of the Employee you want to add?'
+    },
+    {
+        name: 'id',
+        message: 'What is the id number of the Employee you want to add?'
+    },
+    {
+        name: 'email',
+        message: 'What is the email of the Employee you want to add?'
+    },
+    {
+        type: 'list',
+        name: 'role',
+        message: 'What is the job title of the team member you want to add?',
+        choices: [
+            'Manager',
+            'Engineer',
+            'Intern']
+    },
+];
 
-    const ManagerPrompts = [
-        {
-            name: 'name',
-            message: 'What is the name of the Manager you want to add?'
-        },
-        {
-            name: 'email',
-            message: 'What is the email of the Manager you want to add?'
-        },
-        {
-            name: 'office',
-            message: 'What is the office number of the Manager you want add?'
-        },
-        {
-            type: 'confirm',
-            name: 'addnewmember',
-            message: 'Do you want to add another team member?',
-            default: true,
-        },
-    ];
+const ManagerPrompts = [
+{
+    name: 'office',
+    message: 'What is the office number of the Manager you want add?'
+},
+{
+    type: 'confirm',
+    name: 'addnewmember',
+    message: 'Do you want to add another team member?',
+    default: true,
+},
+];
 
-        function managerInfo(){
-            inquirer.prompt(ManagerPrompts).then((data) => {
-                console.log(data.office)
-                if (data.addnewmember){
-                    ask();
+const EngineerPrompts = [
+{
+    name: 'github',
+    message: 'What is Github account of the Engineer you want add?'
+},
+{
+    type: 'confirm',
+    name: 'addnewmember',
+    message: 'Do you want to add another team member?',
+    default: true,
+},
+];
+
+const Employee = function(name, id, email, role)
+    {
+    this.name = name;
+    this.id = id,
+    this.email = email,
+    this.role = role;
+    }
+    function ask(){
+        return inquirer
+        .prompt(employeePrompts).then(data => {
+            const employee = new Employee(data.name, data.id, data.email, data.role)
+            if (data.role === 'Manager'){
+                inquirer.prompt(ManagerPrompts).then(() => {
+                    if (data.addnewmember){
+                        ask();}  
+            })
             }
-        })
-        };
-
-    const EngineerPrompts = [
-        {
-            name: 'name',
-            message: 'What is the name of the Engineer you want to add?'
-        },
-        {
-            name: 'email',
-            message: 'What is the email of the Engineer you want to add?'
-        },
-        {
-            name: 'github',
-            message: 'What is Github account of the Engineer you want add?'
-        },
-        {
-            type: 'confirm',
-            name: 'addnewmember',
-            message: 'Do you want to add another team member?',
-            default: true,
-        },
-    ];
-
-        function engineerInfo(){
-            inquirer.prompt(EngineerPrompts).then((data) => {
-                console.log(data.github)
-                if (data.addnewmember) {
-                    ask();
-                }
-                })
-        };
-
-        function ask(){
-            inquirer.prompt(question).then((answers) => {
-                if (answers.title === 'Manager'){
-                    managerInfo();
-                }
-                if (answers.title === 'Engineer'){
-                    engineerInfo();
-                }
-                if (answers.title === 'Intern'){
-                    internInfo();
+            if (data.role === 'Engineer'){
+                inquirer.prompt(EngineerPrompts).then(() => {
+                    if (data.addnewmember) {
+                        ask();
                 }
             })
-        }
+            }
+            if (data.role === 'Intern'){
+                internInfo();
+            }
+        })
+    }
 
-        ask();
+module.exports = Employee;
+
+ask();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
