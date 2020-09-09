@@ -14,19 +14,7 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-const employeePrompts = [
-    {
-        name: 'name',
-        message: 'What is the name of the Employee you want to add?'
-    },
-    {
-        name: 'id',
-        message: 'What is the id number of the Employee you want to add?'
-    },
-    {
-        name: 'email',
-        message: 'What is the email of the Employee you want to add?'
-    },
+const question = [
     {
         type: 'list',
         name: 'role',
@@ -39,62 +27,71 @@ const employeePrompts = [
 ];
 
 const ManagerPrompts = [
-{
-    name: 'office',
-    message: 'What is the office number of the Manager you want add?'
-},
-{
-    type: 'confirm',
-    name: 'addnewmember',
-    message: 'Do you want to add another team member?',
-    default: true,
-},
-];
+    {
+        name: 'name',
+        message: 'What is the name of the Manager you want to add?'
+    },
+    {
+        name: 'email',
+        message: 'What is the email of the manager you want to add?'
+    },
+    {
+        name: 'officeNumber',
+        message: 'What is the office number of the Manager you want add?'
+    },
+    {
+        type: 'confirm',
+        name: 'addnewmember',
+        message: 'Do you want to add another team member?',
+        default: true,
+    },
+    ];
 
 const EngineerPrompts = [
-{
-    name: 'github',
-    message: 'What is Github account of the Engineer you want add?'
-},
-{
-    type: 'confirm',
-    name: 'addnewmember',
-    message: 'Do you want to add another team member?',
-    default: true,
-},
-];
-
-const Employee = function(name, id, email, role)
     {
-    this.name = name;
-    this.id = id,
-    this.email = email,
-    this.role = role;
-    }
+        name: 'name',
+        message: 'What is the name of the Engineer you want to add?'
+    },
+    {
+        name: 'email',
+        message: 'What is the email of the Engineer you want to add?'
+    },
+    {
+        name: 'github',
+        message: 'What is Github account of the Engineer you want add?'
+    },
+    {
+        type: 'confirm',
+        name: 'addnewmember',
+        message: 'Do you want to add another team member?',
+        default: true,
+    },
+    ];
+
     function ask(){
-        return inquirer
-        .prompt(employeePrompts).then(data => {
-            const employee = new Employee(data.name, data.id, data.email, data.role)
-            if (data.role === 'Manager'){
-                inquirer.prompt(ManagerPrompts).then(() => {
+        inquirer
+        .prompt(question).then(response => {
+            if (response.role === 'Manager'){
+                inquirer.prompt(ManagerPrompts).then(data => {
+                    console.log(data.name, data.officeNumber)
                     if (data.addnewmember){
                         ask();}  
             })
             }
-            if (data.role === 'Engineer'){
-                inquirer.prompt(EngineerPrompts).then(() => {
+            if (response.role === 'Engineer'){
+                inquirer.prompt(EngineerPrompts).then((data) => {
+                    console.log(data.name, data.github)
                     if (data.addnewmember) {
                         ask();
                 }
             })
             }
-            if (data.role === 'Intern'){
+            if (response.role === 'Intern'){
                 internInfo();
             }
+
         })
     }
-
-module.exports = Employee;
 
 ask();
 
