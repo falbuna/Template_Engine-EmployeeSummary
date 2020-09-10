@@ -68,17 +68,33 @@ const EngineerPrompts = [
     },
     ];
 
-    function ask(){
+    const InternPrompts = [
+        {
+            name: 'name',
+            message: 'What is the name of the Intern you want to add?'
+        },
+        {
+            name: 'email',
+            message: 'What is the email of the Intern you want to add?'
+        },
+        {
+            name: 'school',
+            message: 'What is the name of the school of the Intern you want add?'
+        },
+        {
+            type: 'confirm',
+            name: 'addnewmember',
+            message: 'Do you want to add another team member?',
+            default: true,
+        },
+        ];
 
-        let lastId = 0;
-        lastId++;
-        id = lastId;
-
+    function ask(){        
         inquirer
         .prompt(question).then(response => {
             if (response.role === 'Manager'){
                 inquirer.prompt(ManagerPrompts).then(data => {
-                    const manager = new Manager(data.name, id, data.email, data.role, data.officeNumber);
+                    const manager = new Manager(data.name, data.id, data.email, response.role, data.officeNumber);
                     console.log(manager)
                     if (data.addnewmember){
                         ask();
@@ -87,7 +103,7 @@ const EngineerPrompts = [
             }
             if (response.role === 'Engineer'){
                 inquirer.prompt(EngineerPrompts).then(data => {
-                    const engineer = new Engineer(data.name, id, data.email, data.role, data.github);
+                    const engineer = new Engineer(data.name, data.id, data.email, response.role, data.github);
                     console.log(engineer)
                     if (data.addnewmember) {
                         ask();
@@ -95,9 +111,15 @@ const EngineerPrompts = [
             })
             }
             if (response.role === 'Intern'){
-                internInfo();
-            }
+                inquirer.prompt(InternPrompts).then(data => {
+                    const intern = new Intern(data.name, data.id, data.email, response.role, data.school);
+                    console.log(intern)
+                    if (data.addnewmember) {
+                        ask();
+                    }
 
+            })
+            }
         })
     }
 
