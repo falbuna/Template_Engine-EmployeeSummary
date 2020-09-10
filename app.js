@@ -69,18 +69,26 @@ const EngineerPrompts = [
     ];
 
     function ask(){
+
+        let lastId = 0;
+        lastId++;
+        id = lastId;
+
         inquirer
         .prompt(question).then(response => {
             if (response.role === 'Manager'){
                 inquirer.prompt(ManagerPrompts).then(data => {
-                    console.log(data.name, data.officeNumber)
+                    const manager = new Manager(data.name, id, data.email, data.role, data.officeNumber);
+                    console.log(manager)
                     if (data.addnewmember){
-                        ask();}  
+                        ask();
+                    }
             })
             }
             if (response.role === 'Engineer'){
-                inquirer.prompt(EngineerPrompts).then((data) => {
-                    console.log(data.name, data.github)
+                inquirer.prompt(EngineerPrompts).then(data => {
+                    const engineer = new Engineer(data.name, id, data.email, data.role, data.github);
+                    console.log(engineer)
                     if (data.addnewmember) {
                         ask();
                 }
