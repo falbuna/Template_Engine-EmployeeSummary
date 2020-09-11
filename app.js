@@ -10,6 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employees = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -95,32 +96,41 @@ const EngineerPrompts = [
             if (response.role === 'Manager'){
                 inquirer.prompt(ManagerPrompts).then(data => {
                     const manager = new Manager(data.name, data.id, data.email, response.role, data.officeNumber);
-                    console.log(manager)
+                    employees.push(manager);
                     if (data.addnewmember){
                         ask();
+                    }else {
+                        render(employees);
+                        console.log(render(employees));
                     }
             })
             }
             if (response.role === 'Engineer'){
                 inquirer.prompt(EngineerPrompts).then(data => {
                     const engineer = new Engineer(data.name, data.id, data.email, response.role, data.github);
-                    console.log(engineer)
+                    employees.push(engineer);
                     if (data.addnewmember) {
                         ask();
+                }else {
+                    render(employees);
+                    console.log(render(employees));
                 }
             })
             }
             if (response.role === 'Intern'){
                 inquirer.prompt(InternPrompts).then(data => {
                     const intern = new Intern(data.name, data.id, data.email, response.role, data.school);
-                    console.log(intern)
+                    employees.push(intern);
                     if (data.addnewmember) {
                         ask();
+                    }else {
+                        render(employees);
+                        console.log(render(employees));
                     }
-
             })
             }
         })
+
     }
 
 ask();
