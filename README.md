@@ -38,7 +38,7 @@ When the user is satisfied with the team members, they will need to input N (for
 
 ![All the answered prompts using the application](https://github.com/falbuna/Template_Engine-EmployeeSummary/blob/master/Assets/Complete.png)
 
-The user should see a generated html file, "team.html" with the information that was asked from the Inquirer prompts. The user can then open the team.html file in their browser.
+The user should see a generated html file "team.html" in the output folder with the information that was asked from the Inquirer prompts. The user can then open the team.html file in their browser.
 
 ![Generated HTML using the application](https://github.com/falbuna/Template_Engine-EmployeeSummary/blob/master/Assets/generatedHTML.png)
 

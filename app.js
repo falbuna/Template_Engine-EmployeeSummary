@@ -117,10 +117,10 @@ const EngineerPrompts = [
                     // The manager will be pushed into the employees array
                     employees.push(manager);
                     if (data.addnewmember){
-                        // If the user wants to add a new user, it will start again
+                        // If the user wants to add a new user, it will start again with the Initial Prompt
                         ask();
                     }else {
-                        // If the user does not want to a new user, it will generate an HTML from the employees array
+                        // If the user does not want to a new user, it will render and generate an HTML file from the employees array
                         fs.writeFile(outputPath, render(employees), () => {})
                         console.log('Generated HTML complete.')                  
                     }
@@ -134,10 +134,10 @@ const EngineerPrompts = [
                     // The engineer will be pushed into the employees array
                     employees.push(engineer);
                     if (data.addnewmember) {
-                        // If the user wants to add a new user, it will start again
+                        // If the user wants to add a new user, it will start again with the Initial Prompt
                         ask();
                 }else {
-                    // If the user does not want to a new user, it will generate an HTML from the employees array
+                    // If the user does not want to a new user, it will render and generate an HTML file from the employees array
                     fs.writeFile(outputPath, render(employees), () => {})
                     console.log('Generated HTML complete.')            
                 }
@@ -151,10 +151,10 @@ const EngineerPrompts = [
                     // The intern will be pushed into the employees array
                     employees.push(intern);
                     if (data.addnewmember) {
-                        // If the user wants to add a new user, it will start again
+                        // If the user wants to add a new user, it will start again with the Initial Prompt
                         ask();
                     }else {
-                        // If the user does not want to a new user, it will generate an HTML from the employees array
+                        // If the user does not want to a new user, it will render and generate an HTML from the employees array
                         fs.writeFile(outputPath, render(employees), () => {})
                         console.log('Generated HTML complete.')
                     }
@@ -163,7 +163,7 @@ const EngineerPrompts = [
         })
     }
 
-// This will initialize the application
+// This will initialize the application and start with the Initial Prompt
 ask();
 
 // After the user has input all employees desired, call the `render` function (required
