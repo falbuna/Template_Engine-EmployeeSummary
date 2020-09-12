@@ -32,13 +32,24 @@ The user will then be asked for the job title of the team member they will want 
 
 The user will then be asked to input the name of the Manager, an ID, the email for the Manager, and the office number for the Manager. The last prompt will ask if the user wants to input another team member. If the user inputs Y (for Yes), they will be given a prompt to enter the job title for the new team member. If the user wants to input an Engineer, they will be asked for their Github account instead of the office number. Likewise, If the user wants to input an Intern, they will be asked for the School the Intern is attending.
 
-When the user is satisfied with the team members, they will need to input N (for No) when asked if they will want to add another team member. They should see "Generated HTML complete" in the console. 
+![Additional prompts answered using the application](https://github.com/falbuna/Template_Engine-EmployeeSummary/blob/master/Assets/Intern1.png)
 
-The user should see a generated html file, "team.html" with the information that was asked from the Inquirer prompts. The user can open the team.html file in their browser.
+When the user is satisfied with the team members, they will need to input N (for No) when asked if they will want to add another team member. They should see "Generated HTML complete" in the console.
 
+![All the answered prompts using the application](https://github.com/falbuna/Template_Engine-EmployeeSummary/blob/master/Assets/Complete.png)
+
+The user should see a generated html file, "team.html" with the information that was asked from the Inquirer prompts. The user can then open the team.html file in their browser.
+
+![Generated HTML using the application](https://github.com/falbuna/Template_Engine-EmployeeSummary/blob/master/Assets/generatedHTML.png)
 
 If you want to watch a short video on how to use the application, it can be found here: [https://drive.google.com/file/d/189DZKT0ENDrx3PKXrZzKKb8XGSLsG2Rm/view](https://drive.google.com/file/d/189DZKT0ENDrx3PKXrZzKKb8XGSLsG2Rm/view)
 
 ## Tests
 
+There were tests written to ensure functionality for the application using JEST. They can be run using "npm run test".
+
 ## Questions
+
+If you have any questions regarding this application, please reach me at: falbuna1@gmail.com
+
+My Github can be found here: [https://github.com/falbuna/](https://github.com/falbuna/)
