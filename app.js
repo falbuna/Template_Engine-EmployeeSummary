@@ -33,6 +33,10 @@ const ManagerPrompts = [
         message: 'What is the name of the Manager you want to add?'
     },
     {
+        name: 'id',
+        message: 'Input an ID for the Manager.'
+    },
+    {
         name: 'email',
         message: 'What is the email of the manager you want to add?'
     },
@@ -52,6 +56,10 @@ const EngineerPrompts = [
     {
         name: 'name',
         message: 'What is the name of the Engineer you want to add?'
+    },
+    {
+        name: 'id',
+        message: 'Input an ID for the Engineer you want to add.'
     },
     {
         name: 'email',
@@ -75,6 +83,10 @@ const EngineerPrompts = [
             message: 'What is the name of the Intern you want to add?'
         },
         {
+            name: 'id',
+            message: 'Input an Id for the Intern you want to add.'
+        },
+        {
             name: 'email',
             message: 'What is the email of the Intern you want to add?'
         },
@@ -95,7 +107,7 @@ const EngineerPrompts = [
         .prompt(question).then(response => {
             if (response.role === 'Manager'){
                 inquirer.prompt(ManagerPrompts).then(data => {
-                    const manager = new Manager(data.name, data.id, data.email, response.role, data.officeNumber);
+                    const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
                     employees.push(manager);
                     if (data.addnewmember){
                         ask();
@@ -106,7 +118,7 @@ const EngineerPrompts = [
             }
             if (response.role === 'Engineer'){
                 inquirer.prompt(EngineerPrompts).then(data => {
-                    const engineer = new Engineer(data.name, data.id, data.email, response.role, data.github);
+                    const engineer = new Engineer(data.name, data.id, data.email, data.github);
                     employees.push(engineer);
                     if (data.addnewmember) {
                         ask();
@@ -117,7 +129,7 @@ const EngineerPrompts = [
             }
             if (response.role === 'Intern'){
                 inquirer.prompt(InternPrompts).then(data => {
-                    const intern = new Intern(data.name, data.id, data.email, response.role, data.school);
+                    const intern = new Intern(data.name, data.id, data.email, data.school);
                     employees.push(intern);
                     if (data.addnewmember) {
                         ask();
