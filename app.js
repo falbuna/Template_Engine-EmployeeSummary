@@ -112,7 +112,8 @@ const EngineerPrompts = [
                     if (data.addnewmember){
                         ask();
                     }else {
-                        fs.writeFile(outputPath, render(employees), () => {})                    
+                        fs.writeFile(outputPath, render(employees), () => {})
+                        console.log('Generated HTML complete.')                  
                     }
             })
             }
@@ -123,7 +124,8 @@ const EngineerPrompts = [
                     if (data.addnewmember) {
                         ask();
                 }else {
-                    fs.writeFile(outputPath, render(employees), () => {})                
+                    fs.writeFile(outputPath, render(employees), () => {})
+                    console.log('Generated HTML complete.')            
                 }
             })
             }
@@ -135,6 +137,7 @@ const EngineerPrompts = [
                         ask();
                     }else {
                         fs.writeFile(outputPath, render(employees), () => {})
+                        console.log('Generated HTML complete.')
                     }
             })
             }
