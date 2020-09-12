@@ -48,6 +48,8 @@ If you want to watch a short video on how to use the application, it can be foun
 
 There were tests written to ensure functionality for the application using JEST. They can be run using "npm run test".
 
+![Tests using JEST](https://github.com/falbuna/Template_Engine-EmployeeSummary/blob/master/Assets/Tests.png)
+
 ## Questions
 
 If you have any questions regarding this application, please reach me at: falbuna1@gmail.com
