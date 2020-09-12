@@ -91,7 +91,7 @@ const EngineerPrompts = [
         ];
 
     function ask(){        
-        inquirer
+        return inquirer
         .prompt(question).then(response => {
             if (response.role === 'Manager'){
                 inquirer.prompt(ManagerPrompts).then(data => {
@@ -100,8 +100,7 @@ const EngineerPrompts = [
                     if (data.addnewmember){
                         ask();
                     }else {
-                        render(employees);
-                        console.log(render(employees));
+                        fs.writeFile(outputPath, render(employees), () => {})                    
                     }
             })
             }
@@ -112,8 +111,7 @@ const EngineerPrompts = [
                     if (data.addnewmember) {
                         ask();
                 }else {
-                    render(employees);
-                    console.log(render(employees));
+                    fs.writeFile(outputPath, render(employees), () => {})                
                 }
             })
             }
@@ -124,13 +122,11 @@ const EngineerPrompts = [
                     if (data.addnewmember) {
                         ask();
                     }else {
-                        render(employees);
-                        console.log(render(employees));
+                        fs.writeFile(outputPath, render(employees), () => {})
                     }
             })
             }
         })
-
     }
 
 ask();
